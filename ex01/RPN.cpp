@@ -50,6 +50,9 @@ void RPN::calc() {
 			throw syntaxERR();
 		++it;
 	}
+	if (this->rpn.size() != 1){
+		throw syntaxERR();
+	}
 	std::cout << this->rpn.top() << std::endl;
 }
 
