@@ -57,6 +57,8 @@ void RPN::calc() {
 }
 
 void RPN::base_op(int *a, int *b) {
+	if (this->rpn.size() != 2)
+		throw syntaxERR();
 	*b = this->rpn.top();
 	this->rpn.pop();
 	*a = this->rpn.top();
