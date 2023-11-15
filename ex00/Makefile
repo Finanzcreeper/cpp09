@@ -1,7 +1,7 @@
 CXX = c++
 CFLAGS = -g -Wall -Wextra -Werror -std=c++98
-NAME = e
-SRC = main.cpp notFoundException.cpp
+NAME = btc
+SRC = main.cpp btc.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all : $(NAME)
