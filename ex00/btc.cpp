@@ -31,7 +31,10 @@ void btc (char *input) {
 		}
 		else {
 			value = std::strtod((Line.substr(Line.find_first_of('|') + 1, Line.size()).c_str()),NULL);
-			it = findLoc(BTC, Line);
+			it = BTC.find(Line.substr(0, Line.find_first_of('|') - 1));
+			if (it == BTC.end()) {
+				it = BTC.lower_bound(Line.substr(0, Line.find_first_of('|') - 1));
+			}
 			std::cout << it->second << " * " << value << " = " << value * it->second << std::endl;
 		}
 	}
@@ -42,14 +45,6 @@ void btc (char *input) {
 //		std::cout << it->first << ", " << it->second << std::endl;
 //		++it;
 //	}
-}
-
-std::map<std::string ,double>::iterator findLoc(std::map<std::string, double> BTC, std::string Line) {
-	std::map<std::string,double>::iterator it = BTC.find(Line.substr(0, Line.find_first_of('|') - 1));
-	if (it == BTC.end()) {
-		it = BTC.lower_bound(Line.substr(0, Line.find_first_of('|') - 1));
-	}
-	return (it);
 }
 
 bool validateInput(const std::string& Line) {
