@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <utility>
+#include <list>
 
 class PmergeMe {
 private:
@@ -11,18 +12,27 @@ private:
 	int size;
 	bool soloValue;
 	std::pair<int,int> *pairs;
-	std::vector<int> *sorted;
+	std::vector<int> *sortedVec;
+	std::list<int> *sortedList;
 public:
 	PmergeMe(int n, char* args[]);
 	PmergeMe(PmergeMe& src);
 
 	~PmergeMe();
 
-	void printVec();
-
 	PmergeMe& operator=(PmergeMe const& src);
-	void FillVecWithBiggestOutOfPairs();
+
+	void printVec();
+	void printList();
+
+	void SortBiggiesVec();
+	void SortSmalliesVec();
 	void insertInSortedVec(int num);
+	void SortWithVector();
+	void SortBiggiesList();
+	void SortSmalliesList();
+	void insertInSortedList(int num);
+	void SortWithList();
 };
 
 
