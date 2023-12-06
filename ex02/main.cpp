@@ -34,8 +34,8 @@ int main(int argc, char* argv[]) {
 	std::cout << "---LIST----" << std::endl;
 	clock_t Lstart = clock();
 	PmergeMe Lsorter(argc - 1, &argv[1]);
-	Lsorter.SortBiggiesVec();
-	Lsorter.printVec();
+	Lsorter.SortWithList();
+	Lsorter.printList();
 	clock_t Lend = clock();
 	std::cout << "Sorting "<< argc - 1 <<" elements with a list took: " << Lend - Lstart << " μs" << std::endl;
 

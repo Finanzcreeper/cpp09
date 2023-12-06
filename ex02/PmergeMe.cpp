@@ -162,7 +162,7 @@ void PmergeMe::SortSmalliesList() {
 }
 
 void PmergeMe::SortWithVector() {
-	SortBiggiesList();
+	SortBiggiesVec();
 	SortSmalliesVec();
 }
 
