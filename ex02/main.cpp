@@ -24,18 +24,20 @@ int main(int argc, char* argv[]) {
 	std::cout << std::endl;
 
 	std::cout << "---VECTOR----" << std::endl;
+	std::vector<int> Vec;
 	clock_t Vstart = clock();
-	PmergeMe Vsorter(argc - 1, &argv[1]);
-	Vsorter.SortWithVector();
-	Vsorter.printVec();
+	PmergeMe sorter(argc - 1, &argv[1]);
+	sorter.SortJohnson(Vec);
+	sorter.printO(Vec);
 	clock_t Vend = clock();
 	std::cout << "Sorting "<< argc - 1 <<" elements with a vector took: " << Vend - Vstart << " μs" << std::endl;
 
 	std::cout << "---LIST----" << std::endl;
+	std::list<int> List;
 	clock_t Lstart = clock();
 	PmergeMe Lsorter(argc - 1, &argv[1]);
-	Lsorter.SortWithList();
-	Lsorter.printList();
+	Lsorter.SortJohnson(List);
+	Lsorter.printO(List);
 	clock_t Lend = clock();
 	std::cout << "Sorting "<< argc - 1 <<" elements with a list took: " << Lend - Lstart << " μs" << std::endl;
 
