@@ -6,12 +6,14 @@
 #include <utility>
 #include <list>
 #include <iostream>
+#include <cmath>
 
 class PmergeMe {
 private:
 	int pairAmt;
 	int size;
 	bool soloValue;
+	int solo;
 	std::pair<int,int> *pairs;
 public:
 	PmergeMe(int n, char* args[]);
@@ -21,27 +23,38 @@ public:
 
 	PmergeMe& operator=(PmergeMe const& src);
 
-	template<typename O> void SortJohnson(O &container) {
+	template<typename O>
+	void SortJohnson(O &container) {
+		std::vector<std::pair<int,int> > test;
 		int i(0);
-		int a = this->pairAmt;
-		if (soloValue == true)
-			a -= 1;
-		while (i < a) {
+		while (i < this->pairAmt) {
 			if (this->pairs[i].first < this->pairs[i].second) {
 				std::swap(this->pairs[i].first, this->pairs[i].second);
 			}
-			insertInSortedO(container, this->pairs[i].first);
+			insertInSortedtest(test, this->pairs[i]);
 			++i;
 		}
-		i = 0;
-		while (i < this->pairAmt) {
-			if (this->soloValue == true && i == this->pairAmt - 1) {
-				insertInSortedO(container, this->pairs[i].first);
-				break;
+		makeS(test,container);
+		std::vector<std::pair<int,int> >::iterator it = test.begin();
+		insertTest(test, container, it, 2, 0, 2, 2, false);
+		if (this->soloValue == true)
+			insertInSortedO(container, this->solo);
+	}
+
+	template<typename O>
+	void insertTest(std::vector<std::pair<int,int> > &test, O &container,std::vector<std::pair<int,int> >::iterator it, int b, int floor, int pot, int e, bool exit) {
+		while (floor < b ) {
+			if ((e - floor) >= this->pairAmt) {
+				floor = (e - this->pairAmt)+1;
+				exit = true;
 			}
-			insertInSortedO(container, this->pairs[i].second);
-			i++;
+			insertInSortedO(container, (it + (e - floor))->second);
+			++floor;
 		}
+		b = std::pow(2,pot++) - b;
+		e += b;
+		if (exit == false)
+			insertTest(test,container,it,b,0,pot,e, exit);
 	}
 
 	template<typename O> void insertInSortedO(O &container, int num) {
@@ -53,7 +66,27 @@ public:
 		container.insert(it, num);
 	}
 
-	template<typename O> void printO(O &container) {
+	template<typename O>
+	void makeS(std::vector<std::pair<int,int> > &test, O &container) {
+		std::vector<std::pair<int,int> >::iterator lit = test.begin();
+		container.insert(container.begin(), lit++->first);
+		while (lit != test.end()) {
+			container.insert(container.end(), lit++->first);
+		}
+		container.insert(container.begin(),test.begin()->second);
+	}
+
+	void insertInSortedtest(std::vector<std::pair<int,int> > &test, std::pair<int,int> num) {
+		std::vector<std::pair<int,int> >::iterator it = test.begin();
+		if (it != test.end()) {
+			while (it != test.end() && it->first < num.first)
+				++it;
+		}
+		test.insert(it, num);
+	}
+
+	template<typename O>
+	void printO(O &container) {
 		std::cout << "Output:	" ;
 		typename O::iterator it = container.begin();
 		while (it != container.end()) {

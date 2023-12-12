@@ -7,13 +7,12 @@
 
 PmergeMe::PmergeMe(int n, char **args) : size(n) {
 	if (n % 2 == 1) {
-		this->pairAmt = n/2+1;
 		this->soloValue = true;
 	}
 	else {
-		this->pairAmt = n/2;
 		this->soloValue = false;
 	}
+	this->pairAmt = n/2;
 	this->pairs = new std::pair<int,int>[this->pairAmt];
 	int c(0);
 	for (int i = 0; i < this->pairAmt; ++i) {
@@ -21,6 +20,8 @@ PmergeMe::PmergeMe(int n, char **args) : size(n) {
 		if (c < n)
 			this->pairs[i].second = std::atoi(args[c++]);
 	}
+	if (this->soloValue == true)
+		this->solo = std::atoi(args[c]);
 }
 
 PmergeMe::PmergeMe(PmergeMe &src) : pairAmt(src.pairAmt), size(src.size), soloValue(src.soloValue){
@@ -29,6 +30,7 @@ PmergeMe::PmergeMe(PmergeMe &src) : pairAmt(src.pairAmt), size(src.size), soloVa
 		this->pairs[i].first = src.pairs[i].first;
 		this->pairs[i].second = src.pairs[i].second;
 	}
+	this->solo = src.solo;
 }
 
 PmergeMe::~PmergeMe() {
