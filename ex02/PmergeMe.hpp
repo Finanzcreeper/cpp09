@@ -27,6 +27,10 @@ public:
 	void SortJohnson(O &container) {
 		std::vector<std::pair<int,int> > test;
 		int i(0);
+		if (this->pairAmt == 0) {
+				insertInSortedO(container,this->soloValue);
+				return;
+		}
 		while (i < this->pairAmt) {
 			if (this->pairs[i].first < this->pairs[i].second) {
 				std::swap(this->pairs[i].first, this->pairs[i].second);
@@ -48,7 +52,8 @@ public:
 				floor = (e - this->pairAmt)+1;
 				exit = true;
 			}
-			insertInSortedO(container, (it + (e - floor))->second);
+			if (e-floor != 0)
+				insertInSortedO(container, (it + (e - floor))->second);
 			++floor;
 		}
 		b = std::pow(2,pot++) - b;
@@ -57,7 +62,8 @@ public:
 			insertTest(test,container,it,b,0,pot,e, exit);
 	}
 
-	template<typename O> void insertInSortedO(O &container, int num) {
+	template<typename O>
+	void insertInSortedO(O &container, int num) {
 		typename O::iterator it = container.begin();
 		if (it != container.end()) {
 			while (it != container.end() && *it < num)
@@ -76,15 +82,6 @@ public:
 		container.insert(container.begin(),test.begin()->second);
 	}
 
-	void insertInSortedtest(std::vector<std::pair<int,int> > &test, std::pair<int,int> num) {
-		std::vector<std::pair<int,int> >::iterator it = test.begin();
-		if (it != test.end()) {
-			while (it != test.end() && it->first < num.first)
-				++it;
-		}
-		test.insert(it, num);
-	}
-
 	template<typename O>
 	void printO(O &container) {
 		std::cout << "Output:	" ;
@@ -95,6 +92,7 @@ public:
 		}
 		std::cout << std::endl;
 	}
+	void insertInSortedtest(std::vector<std::pair<int,int> > &test, std::pair<int,int> num);
 };
 
 #endif //CPP09_PMERGEME_HPP

@@ -54,3 +54,12 @@ PmergeMe &PmergeMe::operator=(PmergeMe const& src) {
 	}
 	return *this;
 }
+
+void PmergeMe::insertInSortedtest(std::vector<std::pair<int,int> > &test, std::pair<int,int> num) {
+	std::vector<std::pair<int,int> >::iterator it = test.begin();
+	if (it != test.end()) {
+		while (it != test.end() && it->first < num.first)
+			++it;
+	}
+	test.insert(it, num);
+}
