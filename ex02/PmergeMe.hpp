@@ -28,7 +28,7 @@ public:
 		std::vector<std::pair<int,int> > test;
 		int i(0);
 		if (this->pairAmt == 0) {
-				insertInSortedO(container,this->soloValue);
+				insertInSortedO(container,this->solo);
 				return;
 		}
 		while (i < this->pairAmt) {
